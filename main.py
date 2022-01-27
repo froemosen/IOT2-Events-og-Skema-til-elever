@@ -2,6 +2,7 @@ import time
 import os
 
 
+
 def getTime(currentTime): #Daglig send af skema og begivenheder
     global latestTime
     
@@ -14,8 +15,23 @@ def getTime(currentTime): #Daglig send af skema og begivenheder
     
     
 def getCalendar(): #Skaffer kalender fra delt outlook-kalender
-    return("din mor")
-
+    # read the data from the file
+    with open('calendar.ics', 'rt') as f:
+        data = f.readlines()
+    
+    for line in data:
+        if "SUMMARY" in line and newTime: 
+            print(line)
+            newTime = False
+        elif "DTSTART" in line: 
+            date = line.removeprefix("DTSTART;TZID=Romance Standard Time:")
+            date = date[:-3]
+            print(date)
+            print("\n")
+            newTime = True
+        
+        
+        
 
 def getChanges(currentCalendar, prevCalendar): #Tjekker efter ændringer i kalender
     if currentCalendar != prevCalendar:
