@@ -14,7 +14,7 @@ def getTime(currentTime): #Daglig send af skema og begivenheder
     
     
 def getCalendar(): #Skaffer kalender fra delt outlook-kalender
-    pass
+    return("din mor")
 
 
 def getChanges(currentCalendar, prevCalendar): #Tjekker efter ændringer i kalender
@@ -29,12 +29,12 @@ def getChanges(currentCalendar, prevCalendar): #Tjekker efter ændringer i kalen
 
 
 def sendCalendar(Calendar): #Sender daglig kalender til IFTTT
-    pass
+    print(Calendar)
 
 def timeToClear(unix):
     global lastClearTime
     
-    if unix > lastClearTime+30: 
+    if unix > lastClearTime+86400: 
         lastClearTime = unix
         return True
     else: 
@@ -71,5 +71,5 @@ if __name__ == '__main__':
         prevCalendar = currentCalendar
         print("\n")
         if timeToClear(int(time.time())): os.system("cls")
-        #time.sleep(1) #Opdater ændringer hvert minut
+        time.sleep(60) #Opdater ændringer hvert minut
 
